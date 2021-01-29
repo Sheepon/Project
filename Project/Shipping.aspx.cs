@@ -41,14 +41,15 @@ namespace Project
             SqlDataReader dR,dRProduct;
             string strSqlCmd = $"Select productId,quantity from shopcartitem where shopcartid = '{Session["ShopCartId"]}'";
             dR = objdbMgmt.ExecuteSelect(strSqlCmd);
-            if (dR.Read()) {
+            while (dR.Read()) {
                 strSqlCmd = $"Select productid,quantity from product where productid = '{dR["productId"]}'";
                 dRProduct = objdbMgmtProduct.ExecuteSelect(strSqlCmd);
-                if (dRProduct.Read()) {
+                while(dRProduct.Read()) {
                     int intTmp = int.Parse(dRProduct["quantity"].ToString()) - int.Parse(dR["quantity"].ToString());
                     strSqlCmd = $"update Product set quantity = {intTmp} where productId = '{dRProduct["productid"]}'";
                     objdbMgmtUpdate.ExecuteNonQuery(strSqlCmd);
                 }
+                dRProduct.Close();
                 //strSqlCmd = $"update product set quantity ={dR[]};
                 //strSqlCmd = "UPDATE ShopCartItem SET Quantity=" + intQuantity + " WHERE ShopCartID=" + Session["ShopCartID"] + " AND ProductId=" + intProductID;
             }

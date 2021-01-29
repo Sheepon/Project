@@ -129,7 +129,7 @@
             <tr>
                 <td class="auto-style13">Product Description</td>
                 <td class="auto-style14">
-                    <asp:TextBox ID="productDescriptionTextBox" runat="server" BorderColor="#CCCCCC" BorderStyle="Solid" BorderWidth="1px" TextMode="Password" Height="102px" Width="119px"></asp:TextBox>
+                    <asp:TextBox ID="productDescriptionTextBox" runat="server" BorderColor="#CCCCCC" BorderStyle="Solid" BorderWidth="1px" TextMode="MultiLine" Height="102px" Width="119px"></asp:TextBox>
                     <br />
                 </td>
             </tr>
@@ -153,7 +153,7 @@
                 <td class="auto-style8">
                     Stocks</td>
                 <td class="auto-style9">
-                    <asp:TextBox ID="stockTextbox" runat="server" BorderColor="#CCCCCC" BorderStyle="Solid" BorderWidth="1px"></asp:TextBox>
+                    <asp:TextBox ID="stockTextbox" runat="server" BorderColor="#CCCCCC" BorderStyle="Solid" BorderWidth="1px" TextMode="Number"></asp:TextBox>
                     <br />
                     </td>
             </tr>

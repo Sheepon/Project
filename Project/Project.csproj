@@ -69,9 +69,7 @@
   <ItemGroup>
     <Content Include="AddItem.aspx" />
     <Content Include="App_Data\eceBkShop.mdf" />
-    <Content Include="App_Data\eceBkShop_log.ldf">
-      <DependentUpon>eceBkShop.mdf</DependentUpon>
-    </Content>
+    <Content Include="App_Data\eceBkShop_log.ldf" />
     <Content Include="Catalog.aspx" />
     <Content Include="DeleteItem.aspx" />
     <Content Include="Home.aspx" />
