@@ -8,6 +8,11 @@
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
     <style>
+
+        navbar{
+            height:40px;
+        }
+
         ul{
             list-style-type: none;
             margin: 0;
@@ -89,7 +94,7 @@
         }
     </style>
 </head>
-<body style="margin:50">
+<body style="margin:0px">
     <form id="form1" runat="server">
         <div class="muh-head">
             <div>
@@ -106,9 +111,13 @@
                         <asp:LinkButton ID="CatalogSnacks" CausesValidation="false" runat="server" OnClick="CatalogSnacks_Click">Snacks</asp:LinkButton>
                     </div>
                </li>
+               <li><asp:TextBox ID="tbSearch" runat="server" placeholder="Search" Height="40px" Width="192px"></asp:TextBox></li>
+               <li><asp:ImageButton ID="ImageButton1" runat="server" Height="45px" ImageUrl="Images/search.png" Width="45px" OnClick="ImageButton1_Click" /></li>
+               <li style="float:right;"><asp:LinkButton ID="CheckoutBtn" CausesValidation="false" runat="server" OnClick="CheckoutBtn_Click">Checkout</asp:LinkButton></li>
                <li style="float:right" class="dropdown">
                     <asp:LinkButton ID="ProfileButton" runat="server" CausesValidation="false" OnClick="ProfileButton_Click">Profile</asp:LinkButton>
                     <div style="float:right" class="dropdown-content">
+                        <asp:LinkButton ID="Shopping_cartBtn" CausesValidation="false" runat="server" OnClick="Shopping_cartBtn_Click">Shopping Cart</asp:LinkButton>
                         <asp:LinkButton ID="SellButton" CausesValidation="false" runat="server" OnClick="SellButton_Click">Sell</asp:LinkButton>
                         <asp:LinkButton ID="LogoutButton" CausesValidation="false" runat="server" OnClick="LogoutButton_Click">Logout</asp:LinkButton>
                     </div>

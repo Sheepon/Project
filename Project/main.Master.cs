@@ -17,12 +17,18 @@ namespace Project
                 loginsButton.Visible = false;
                 SellButton.Visible = true;
                 ProfileButton.Visible = true;
+                Shopping_cartBtn.Visible = true;
+                CheckoutBtn.Visible = true;
+
+                ProfileButton.Text = $"Welcome , {Session["Name"]}";
             } else {
                 RegisterButton.Visible = true;
                 LogoutButton.Visible = false;
                 loginsButton.Visible = true;
                 SellButton.Visible = false;
                 ProfileButton.Visible = false;
+                Shopping_cartBtn.Visible = false;
+                CheckoutBtn.Visible = false;
             }
 
         }
@@ -74,6 +80,21 @@ namespace Project
         protected void ProfileButton_Click(object sender, EventArgs e)
         {
 
+        }
+
+        protected void CheckoutBtn_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Shipping.aspx");    
+        }
+
+        protected void Shopping_cartBtn_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("ShopCart.aspx");
+        }
+
+        protected void ImageButton1_Click(object sender, ImageClickEventArgs e)
+        {
+            Response.Redirect($"Search.aspx?search={tbSearch.Text}");
         }
     }
 }

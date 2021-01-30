@@ -74,6 +74,7 @@
     <Content Include="DeleteItem.aspx" />
     <Content Include="Home.aspx" />
     <Content Include="Images\Be-part-of-Xtra.jpg" />
+    <Content Include="Images\search.png" />
     <Content Include="Images\testing.jpg" />
     <Content Include="Login.aspx" />
     <Content Include="Product.aspx" />
