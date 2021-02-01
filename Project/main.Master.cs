@@ -92,9 +92,9 @@ namespace Project
             Response.Redirect("ShopCart.aspx");
         }
 
-        protected void ImageButton1_Click(object sender, ImageClickEventArgs e)
-        {
-            Response.Redirect($"Search.aspx?search={tbSearch.Text}");
-        }
+        //protected void ImageButton1_Click(object sender, ImageClickEventArgs e)
+        //{
+        //    Response.Redirect($"Search.aspx?search={tbSearch.Text}");
+        //}
     }
 }

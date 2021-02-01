@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Data.SqlClient;
+using System.Web.Configuration;
+using System.Data;
+using System.Configuration;
 
 namespace Project.App_Code
 {
-    using System.Data.SqlClient;
-    using System.Web.Configuration;
-    using System.Data;
-
     public class DatabaseMgmt
     {
         SqlConnection connObj = new SqlConnection();
@@ -19,7 +19,8 @@ namespace Project.App_Code
         public DatabaseMgmt()
         {
             connObj = new SqlConnection();
-            connStr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Sheepe\Desktop\OOPG\Project\Project\App_Data\eceBkShop.mdf;Integrated Security=True";
+            connStr = ConfigurationManager.ConnectionStrings["database"].ConnectionString;
+            //connStr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Sheepe\Desktop\OOPG\Project\Project\App_Data\eceBkShop.mdf;Integrated Security=True";
             if (connObj.State != ConnectionState.Open) {
                 connObj = new SqlConnection(connStr);
                 connObj.Open();

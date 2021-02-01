@@ -43,26 +43,25 @@ namespace Project
                     strSqlCmd = $"Insert into Shopper(Name, Address,Phone, Email, Passwd) VALUES ('{strName}','{strAddress}'," +
                         $"'{strPhone}','{strEmail}','{strPassword}')";
                     dbObj.ExecuteNonQuery(strSqlCmd);
-                }
 
-                strSqlCmd = $"select MAX(ShopperID) From Shopper";
-                if ((returnVal = (object)dbObj.ExecuteScalar(strSqlCmd)) != null) {
-                    intShopperID = Convert.ToInt32(returnVal);
+                    strSqlCmd = $"select MAX(ShopperID) From Shopper";
+                    if ((returnVal = (object)dbObj.ExecuteScalar(strSqlCmd)) != null) {
+                        intShopperID = Convert.ToInt32(returnVal);
+                    } else {
+                        intShopperID = 0;
+                    }
+
+                    Session["ShopperID"] = intShopperID;
+                    Session["Name"] = strName;
+                    Session["Address"] = strAddress;
+                    Session["Phone"] = strPhone;
+                    Session["Email"] = strEmail;
+                    Session["ProfileRetrived"] = 1;
+                    msgLabel.Text = "Registration Successful";
                 } else {
-                    intShopperID = 0;
+                    msgLabel.Text = "Please select another email to register";
                 }
-
-                Session["ShopperID"] = intShopperID;
-                Session["Name"] = strName;
-                Session["Address"] = strAddress;
-                Session["Phone"] = strPhone;
-                Session["Email"] = strEmail;
-                Session["ProfileRetrived"] = 1;
-                msgLabel.Text = "Registration Successful";
-
-            } else {
-                msgLabel.Text = "Please select another email to register";
-            }
+            } 
         }
     }
 }
