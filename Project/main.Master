@@ -111,8 +111,8 @@
                         <asp:LinkButton ID="CatalogSnacks" CausesValidation="false" runat="server" OnClick="CatalogSnacks_Click">Snacks</asp:LinkButton>
                     </div>
                </li>
-<%--               <li><asp:TextBox ID="tbSearch" runat="server" placeholder="Search" Height="40px" Width="192px"></asp:TextBox></li>--%>
-<%--               <li><asp:ImageButton ID="ImageButton1" runat="server" Height="45px" ImageUrl="Images/search.png" Width="45px" OnClick="ImageButton1_Click" /></li>--%>
+               <li><asp:TextBox ID="tbSearch" runat="server" placeholder="Search" Height="40px" Width="192px"></asp:TextBox></li>
+               <li><asp:ImageButton ID="ImageButton1" runat="server" Height="45px" ImageUrl="Images/search.png" Width="45px" OnClick="ImageButton1_Click" /></li>
                <li style="float:right;"><asp:LinkButton ID="CheckoutBtn" CausesValidation="false" runat="server" OnClick="CheckoutBtn_Click">Checkout</asp:LinkButton></li>
                <li style="float:right" class="dropdown">
                     <asp:LinkButton ID="ProfileButton" runat="server" CausesValidation="false" OnClick="ProfileButton_Click">Profile</asp:LinkButton>
