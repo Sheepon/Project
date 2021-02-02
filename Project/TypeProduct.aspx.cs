@@ -13,34 +13,47 @@ namespace Project
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            Session["LastDeptID"] = Request["DeptID"];
-
             DatabaseMgmt objdbMgmt = new DatabaseMgmt();
-
             string strSqlCmd;
-            System.Data.SqlClient.SqlDataReader objDataReader;
+            SqlDataReader objDataReader;
 
-            strSqlCmd = "SELECT DeptName, DeptDesc FROM Department WHERE DepartmentID=" + Request.QueryString["DeptID"];
 
-            objDataReader = objdbMgmt.ExecuteSelect(strSqlCmd);
+            if (Request.QueryString["search"] == null) {
+                Session["LastDeptID"] = Request["DeptID"];
 
-            // Close the data reader
-            objDataReader.Close();
+                strSqlCmd = "SELECT DeptName, DeptDesc FROM Department WHERE DepartmentID=" + Request.QueryString["DeptID"];
 
-            // Retrieve products that belonged to the selected 
-            // department from the database. 
-            strSqlCmd = "SELECT p.ProductID, p.ProductTitle,p.ProductImage, p.Price, p.Quantity FROM DepartmentProduct dp  INNER JOIN Product p ON dp.ProductID=p.ProductID" + " WHERE dp.DepartmentID=" +
+                objDataReader = objdbMgmt.ExecuteSelect(strSqlCmd);
 
-                    Request.QueryString["DeptID"];
-            objDataReader = objdbMgmt.ExecuteSelect(strSqlCmd);
-            dgDeptProduct.DataSource = objDataReader;
+                // Close the data reader
+                objDataReader.Close();
 
-            // Bind the data to the data list control for display
-            dgDeptProduct.DataBind();
+                // Retrieve products that belonged to the selected 
+                // department from the database. 
+                strSqlCmd = "SELECT p.ProductID, p.ProductTitle,p.ProductImage, p.Price, p.Quantity FROM DepartmentProduct dp  INNER JOIN Product p ON dp.ProductID=p.ProductID" + " WHERE dp.DepartmentID=" +
 
-            // Close the connection object
-            objDataReader.Close();
-            objdbMgmt.Close();
+                        Request.QueryString["DeptID"];
+                objDataReader = objdbMgmt.ExecuteSelect(strSqlCmd);
+                dgDeptProduct.DataSource = objDataReader;
+
+                // Bind the data to the data list control for display
+                dgDeptProduct.DataBind();
+
+                // Close the connection object
+                objDataReader.Close();
+                objdbMgmt.Close();
+            } else {
+                strSqlCmd = "SELECT p.ProductID, p.ProductTitle,p.ProductImage, p.Price, p.Quantity FROM DepartmentProduct dp  INNER JOIN Product p ON dp.ProductID=p.ProductID" + " WHERE p.ProductTitle like '%" +
+                    Request.QueryString["search"] + "%'";
+                objDataReader = objdbMgmt.ExecuteSelect(strSqlCmd);
+
+                dgDeptProduct.DataSource = objDataReader;
+                dgDeptProduct.DataBind();
+                objDataReader.Close();
+                objdbMgmt.Close(); 
+            }
+
+
         }
 
 
