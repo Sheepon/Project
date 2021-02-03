@@ -164,6 +164,9 @@
                     <asp:DropDownList ID="typeDropdown" runat="server">
                         <asp:ListItem Value="1">Stationary</asp:ListItem>
                         <asp:ListItem Value="2">Food</asp:ListItem>
+                        <asp:ListItem Value="3">Books</asp:ListItem>
+                        <asp:ListItem Value="4">Clothes</asp:ListItem>
+                        <asp:ListItem Value="5">Manga</asp:ListItem>
                     </asp:DropDownList>
                     </td>
             </tr>

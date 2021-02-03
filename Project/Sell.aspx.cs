@@ -15,6 +15,7 @@ namespace Project
         protected void Page_Load(object sender, EventArgs e)
         {
             int ShopperID = Convert.ToInt32(Session["ShopperID"]);
+
         }
 
         protected void sellButton_Click(object sender, EventArgs e)
