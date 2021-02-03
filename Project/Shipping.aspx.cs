@@ -13,22 +13,22 @@ namespace Project
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if(Page.IsPostBack == false) {
+                DatabaseMgmt objdbMgmt = new DatabaseMgmt();
+                SqlDataReader dR;
+                objdbMgmt.Connect();
 
-            DatabaseMgmt objdbMgmt = new DatabaseMgmt();
-            SqlDataReader dR;
-            objdbMgmt.Connect();
+                string strSqlCmd;
+                strSqlCmd = $"select address,email,phone from Shopper where ShopperID='{Session["ShopperId"]}'";
+                dR = objdbMgmt.ExecuteSelect(strSqlCmd);
 
-            string strSqlCmd;
-            strSqlCmd = $"select address,email,phone from Shopper where ShopperID='{Session["ShopperId"]}'";
-            dR = objdbMgmt.ExecuteSelect(strSqlCmd);
-
-            nameTextBox.Text = (string)Session["Name"];
-            if (dR.Read()) {
-                addressTextbox.Text = dR["address"].ToString();
-                emailTextbox.Text = dR["email"].ToString();
-                phoneTextbox.Text = dR["phone"].ToString();
+                nameTextBox.Text = (string)Session["Name"];
+                if (dR.Read()) {
+                    addressTextbox.Text = dR["address"].ToString();
+                    emailTextbox.Text = dR["email"].ToString();
+                    phoneTextbox.Text = dR["phone"].ToString();
+                }
             }
-
         }
 
         protected void RegisterButton_Click(object sender, EventArgs e)
@@ -55,6 +55,18 @@ namespace Project
             }
             Session["ShopCartId"] = null;
             msgLabel.Text = "Your order will be delivered soon";
+            Response.AddHeader("REFRESH", "3;URL=Home.aspx");
+        }
+
+        protected void UpdateButton_Click(object sender, EventArgs e)
+        {
+            int tmpDebug;
+            string sqlcmd = $"update shopper set name = '{nameTextBox.Text}', address = '{addressTextbox.Text}', email = '{emailTextbox.Text}', phone = '{phoneTextbox.Text}' where shopperid = '{Session["ShopperId"]}'";
+            //string strSqlCmd = $"update shopper set name = '{nameTextBox.Text}' where ShopperID='{Session["ShopperId"]}'";
+            DatabaseMgmt objdbMgmt = new DatabaseMgmt();
+            tmpDebug = objdbMgmt.ExecuteNonQuery(sqlcmd);
+            msgLabel.Text = "Updated. Settings Take effect after logout";
+            
         }
     }
 }
