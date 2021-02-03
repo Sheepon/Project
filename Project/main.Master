@@ -109,6 +109,9 @@
                     <div class="dropdown-content">
                         <asp:LinkButton ID="CatalogStationary" CausesValidation="false" runat="server" OnClick="CatalogStationary_Click">Stationary</asp:LinkButton>
                         <asp:LinkButton ID="CatalogSnacks" CausesValidation="false" runat="server" OnClick="CatalogSnacks_Click">Snacks</asp:LinkButton>
+                        <asp:LinkButton ID="CatalogBooks" CausesValidation="false" runat="server" OnClick="CatalogBooks_Click">Books</asp:LinkButton>
+                        <asp:LinkButton ID="CatalogClothes" CausesValidation="false" runat="server" OnClick="CatalogClothes_Click">Clothes</asp:LinkButton>
+                        <asp:LinkButton ID="CatalogManga" CausesValidation="false" runat="server" OnClick="CatalogManga_Click">Manga</asp:LinkButton>
                     </div>
                </li>
                <li><asp:TextBox ID="tbSearch" runat="server" placeholder="Search" Height="40px" Width="192px"></asp:TextBox></li>

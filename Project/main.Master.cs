@@ -96,5 +96,20 @@ namespace Project
         {
             Response.Redirect($"TypeProduct.aspx?search={tbSearch.Text}");
         }
+
+        protected void CatalogBooks_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("TypeProduct.aspx?DeptID=3");
+        }
+
+        protected void CatalogClothes_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("TypeProduct.aspx?DeptID=4");
+        }
+
+        protected void CatalogManga_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("TypeProduct.aspx?DeptID=5");
+        }
     }
 }
