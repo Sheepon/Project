@@ -2,8 +2,8 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <asp:datagrid id="dgDeptProduct" runat="server" Font-Size="10pt" PageSize="2" GridLines="None"
-						AutoGenerateColumns="False" ShowHeader="False" Font-Names="Verdana" CellSpacing="3" CellPadding="3" Width="287px">
+    <asp:datagrid id="dgDeptProduct" runat="server" Font-Size="10pt" PageSize="3" GridLines="Horizontal"
+						AutoGenerateColumns="False" ShowHeader="False" Font-Names="Verdana" CellPadding="4" Width="287px" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" ForeColor="Black" AllowPaging="True" AllowSorting="True" OnPageIndexChanged="dgDeptProduct_PageIndexChanged">
         <Columns>
             <asp:TemplateColumn>
                 <ItemTemplate>
@@ -30,6 +30,9 @@
                 </ItemTemplate>
             </asp:TemplateColumn>
         </Columns>
-        <PagerStyle NextPageText="Next Page" Font-Size="Smaller" PrevPageText="Previous Page" HorizontalAlign="Right"></PagerStyle>
+        <FooterStyle BackColor="#CCCC99" ForeColor="Black" />
+        <HeaderStyle BackColor="#333333" Font-Bold="True" ForeColor="White" />
+        <PagerStyle NextPageText="Next Page" Font-Size="Smaller" PrevPageText="Previous Page" HorizontalAlign="Right" BackColor="White" ForeColor="Black"></PagerStyle>
+        <SelectedItemStyle BackColor="#CC3333" Font-Bold="True" ForeColor="White" />
     </asp:datagrid>
 </asp:Content>

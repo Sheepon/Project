@@ -74,7 +74,7 @@ namespace Project
 
             if (dR.Read()) {
                 if (int.Parse(txtQty.Text) > int.Parse(dR["quantity"].ToString())) {
-                    Response.Write("<script>alert('Invalid quantity');</script>");
+                    Response.Write("<script>alert('Invalid quantity/Sold out');</script>");
                     return;
                 }
             }

@@ -4,14 +4,22 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Data.SqlClient;
+using Project.App_Code;
 
 namespace Project
 {
     public partial class main : System.Web.UI.MasterPage
     {
+        int itemnum;
         protected void Page_Load(object sender, EventArgs e)
         {
-            if(Session["ShopperID"] != null) {
+
+            DatabaseMgmt objdbMgmt = new DatabaseMgmt();
+            string strSqlCmd;
+            SqlDataReader dR;
+
+            if (Session["ShopperID"] != null) {
                 LogoutButton.Visible = true;
                 RegisterButton.Visible = false;
                 loginsButton.Visible = false;
@@ -30,6 +38,17 @@ namespace Project
                 Shopping_cartBtn.Visible = false;
                 CheckoutBtn.Visible = false;
             }
+
+            if (Session["ShopCartId"] != null) {
+                strSqlCmd = $"select quantity from shopcartitem where shopcartid = '{Session["ShopCartId"]}'";
+                dR = objdbMgmt.ExecuteSelect(strSqlCmd);
+
+                while (dR.Read()) {
+                    itemnum = itemnum + int.Parse(dR["quantity"].ToString());
+                }
+                Shopping_cartBtn.Text = $"Shop Cart ({itemnum})";
+            }
+                
 
         }
 
