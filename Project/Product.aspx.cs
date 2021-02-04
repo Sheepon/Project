@@ -66,6 +66,18 @@ namespace Project
             // Set the Session Variables:
             // ProductID, ProductName, ProductPrice and Quantity
             //===================================================
+            DatabaseMgmt objdbMgmt = new DatabaseMgmt();
+            SqlDataReader dR;
+
+            string strSqlCmd = $"select quantity from Product where productId = {int.Parse(Request["ProductId"])}";
+            dR = objdbMgmt.ExecuteSelect(strSqlCmd);
+
+            if (dR.Read()) {
+                if (int.Parse(txtQty.Text) > int.Parse(dR["quantity"].ToString())) {
+                    Response.Write("<script>alert('Invalid quantity');</script>");
+                    return;
+                }
+            }
             Session["Quantity"] = txtQty.Text;
             Session["ProductName"] = lblProductTitle.Text;
             Session["ProductPrice"] = lblProductPrice.Text;

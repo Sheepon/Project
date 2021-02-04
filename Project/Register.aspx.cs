@@ -39,6 +39,8 @@ namespace Project
                     intShopperID = 0;
                 }
 
+
+
                 if(intShopperID == 0) {
                     strSqlCmd = $"Insert into Shopper(Name, Address,Phone, Email, Passwd) VALUES ('{strName}','{strAddress}'," +
                         $"'{strPhone}','{strEmail}','{strPassword}')";
