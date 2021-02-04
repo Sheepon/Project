@@ -46,6 +46,12 @@ namespace Project.App_Code
                 connObj.Close();
         }
 
+        public void Open()
+        {
+            if (connObj.State == ConnectionState.Closed)
+                connObj.Open();
+        }
+
         public int ExecuteNonQuery(string sqlString)
         {
             comdObj = new SqlCommand(sqlString, connObj);

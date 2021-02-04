@@ -83,6 +83,7 @@ namespace Project
         {
             // Connect to the database
             DatabaseMgmt objdbMgmt = new DatabaseMgmt();
+            string strSqlCmd;
 
             // Iterate through all rows within shopping cart list 
             // (i.e. the dgShopCart data grid)
@@ -98,16 +99,31 @@ namespace Project
                 int intQuantity;
                 intQuantity = Convert.ToInt16(txtQuantity.Text);
 
+                if(intQuantity <= 0) {
+                    Response.Write("<script>alert('Invalid quantity');</script>");
+                    return;
+                }
                 // Get the ProductId from the first cell 
                 // and convert to integer
                 int intProductID;
 
                 intProductID = Convert.ToInt16(dgShopCart.Rows[i].Cells[0].Text);
 
-                // Update quantity order of shopping cart in database
-                string strSqlCmd;
-                strSqlCmd = "UPDATE ShopCartItem SET Quantity=" + intQuantity + " WHERE ShopCartID=" + Session["ShopCartID"] + " AND ProductId=" + intProductID;
 
+                strSqlCmd = $"select quantity from Product where productId = {intProductID}";
+                SqlDataReader dR = objdbMgmt.ExecuteSelect(strSqlCmd);
+
+                if (dR.Read()) {
+                    if (intQuantity > int.Parse(dR["quantity"].ToString())) {
+                        Response.Write("<script>alert('Invalid quantity');</script>");
+                        return;
+                    }
+                }
+                objdbMgmt.Close();
+
+                // Update quantity order of shopping cart in database
+                strSqlCmd = "UPDATE ShopCartItem SET Quantity=" + intQuantity + " WHERE ShopCartID=" + Session["ShopCartID"] + " AND ProductId=" + intProductID;
+                objdbMgmt.Open();
                 objdbMgmt.ExecuteNonQuery(strSqlCmd);
             }
             displayShopCart();
