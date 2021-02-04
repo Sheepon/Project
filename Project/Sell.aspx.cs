@@ -24,8 +24,8 @@ namespace Project
             SqlDataReader dR;
             string strProductName = productNameTextBox.Text;
             string strProductDescription = productDescriptionTextBox.Text;
-            float fltPrice = float.Parse(priceButton.Text);
-            int intStock = int.Parse(stockTextbox.Text);
+            float fltPrice;
+            int intStock;
             int productType = int.Parse(typeDropdown.SelectedValue);
             int productId = 0;
             string strSqlCmd;
@@ -36,6 +36,31 @@ namespace Project
 
             strFileName = oFile.PostedFile.FileName;
             strFileName = Path.GetFileName(strFileName);
+
+            if(strProductName == "") {
+                Response.Write("<script>alert('Product name Needed');</script>");
+                return;
+            }
+
+            if(strProductDescription == "") {
+                Response.Write("<script>alert('Description Needed');</script>");
+                return;
+            }
+
+            if(priceButton.Text == "") {
+                Response.Write("<script>alert('Price Needed');</script>");
+                return;
+            } else {
+                fltPrice = float.Parse(priceButton.Text);
+            }
+
+            if(stockTextbox.Text == "") {
+                Response.Write("<script>alert('Stock needed');</script>");
+                return;
+            } else {
+                intStock = int.Parse(stockTextbox.Text);
+            }
+
 
             if (oFile.Value != "") {
                 // Create the folder if it does not exist.
@@ -48,6 +73,7 @@ namespace Project
                 msgLabel.Text = strFileName + " has been successfully uploaded.";
             } else {
                 msgLabel.Text = "Click 'Browse' to select the file to upload.";
+                return;
             }
 
             strSqlCmd = $"Insert into Product(productTitle,ProductDesc,ProductImage,Price,Quantity)" +
