@@ -153,6 +153,22 @@
                     <asp:RequiredFieldValidator ID="phoneValidator" runat="server" ControlToValidate="phoneTextbox" ErrorMessage="Please enter your password" ForeColor="#FF5050"></asp:RequiredFieldValidator>
                 </td>
             </tr>
+                   <tr>
+                <td class="auto-style8">
+                    Security Question:</td>
+                <td class="auto-style9">
+
+                    <asp:DropDownList ID="DropDownList1" runat="server">
+                        <asp:ListItem Selected="True">What is your pet name?</asp:ListItem>
+                        <asp:ListItem>Where did your parents meet?</asp:ListItem>
+                        <asp:ListItem>test</asp:ListItem>
+                    </asp:DropDownList>
+
+                    <asp:TextBox ID="SecurityTextBox" runat="server" BorderColor="#CCCCCC" BorderStyle="Solid" BorderWidth="1px"></asp:TextBox>
+                    <br />
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="SecurityTextbox" ErrorMessage="Please enter your answer." ForeColor="#FF5050"></asp:RequiredFieldValidator>
+                </td>
+            </tr>
             <tr>
                 <td style="text-align:center" class="auto-style10" colspan="2">
                     <asp:Label ID="msgLabel" runat="server"></asp:Label>
