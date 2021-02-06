@@ -69,33 +69,6 @@ namespace Project
         protected global::System.Web.UI.WebControls.LinkButton CatalogSnacks;
 
         /// <summary>
-        /// CatalogBooks control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton CatalogBooks;
-
-        /// <summary>
-        /// CatalogClothes control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton CatalogClothes;
-
-        /// <summary>
-        /// CatalogManga control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton CatalogManga;
-
-        /// <summary>
         /// tbSearch control.
         /// </summary>
         /// <remarks>
@@ -130,6 +103,24 @@ namespace Project
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton ProfileButton;
+
+        /// <summary>
+        /// AccountCredit control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton AccountCredit;
+
+        /// <summary>
+        /// CardDetailsButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton CardDetailsButton;
 
         /// <summary>
         /// Shopping_cartBtn control.
