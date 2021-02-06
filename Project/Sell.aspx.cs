@@ -80,12 +80,8 @@ namespace Project
                 $"Values('{strProductName}','{strProductDescription}','{strFileName}','{fltPrice}','{intStock}')";
             dbObj.ExecuteNonQuery(strSqlCmd);
 
-            strSqlCmd = $"select productId from Product where productTitle = '{strProductName}'";
-            dR = dbObj.ExecuteSelect(strSqlCmd);
-            while (dR.Read()) {
-                productId = int.Parse(dR["productId"].ToString());
-            }
-            dR.Close();
+            string strSel = "Select Max(ProductID) from Product";
+            productId = int.Parse(dbObj.ExecuteScalar(strSel).ToString());
 
             strSqlCmd = $"Insert into DepartmentProduct(DepartmentId,ProductID) Values({productType},{productId})";
             dbObj.ExecuteNonQuery(strSqlCmd);
