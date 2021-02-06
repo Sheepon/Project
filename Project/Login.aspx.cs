@@ -14,6 +14,7 @@ namespace Project
 {
     public partial class Login : System.Web.UI.Page
     {
+        static int attemptCounts = 0;
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -21,6 +22,7 @@ namespace Project
 
         protected void loginButton_Click(object sender, EventArgs e)
         {
+            attemptCounts = attemptCounts + 1;
             SqlDataReader dR;
             string strPassword;
 
@@ -29,22 +31,74 @@ namespace Project
             string selStr = $"select passwd, name, ShopperId from SHopper Where email ='{emailTextBox.Text}'";
 
             dR = dbObj.ExecuteSelect(selStr);
-            if (dR.Read()) {
-                strPassword = dR["passwd"].ToString();
+            if (dR.Read())
+            {
+                if (attemptCounts < 3)
+                {
+                        strPassword = dR["passwd"].ToString();
 
-                if(strPassword == pswTextBox.Text) {
-                    Session["Password"] = strPassword;
-                    Session["Name"] = dR["name"].ToString();
-                    Session["ShopperId"] = dR["ShopperID"].ToString();
-                    Response.Redirect("Home.aspx");
-                } else {
-                    msgLabel.Text = "Email or password incorrect";
+                        if (strPassword == pswTextBox.Text)
+                        {
+                            Session["Password"] = strPassword;
+                            Session["Name"] = dR["name"].ToString();
+                            Session["ShopperId"] = dR["ShopperID"].ToString();
+                            Response.Redirect("Home.aspx");
+                        }
+                        else
+                        {
+                            msgLabel.Text = "Email or password incorrect";
+                        }
+                    
                 }
 
-            } else {
+                else if (attemptCounts == 3)
+                {
+                    suggestionHyperLink.Visible = true;
+                    suggestionHyperLink.Text = "Forgot your password?";
+                    if (dR.Read())
+                    {
+                        strPassword = dR["passwd"].ToString();
+
+                        if (strPassword == pswTextBox.Text)
+                        {
+                            Session["Password"] = strPassword;
+                            Session["Name"] = dR["name"].ToString();
+                            Session["ShopperId"] = dR["ShopperID"].ToString();
+                            Response.Redirect("Home.aspx");
+                        }
+                        else
+                        {
+                            msgLabel.Text = "Email or password incorrect";
+                        }
+                    }
+                }
+
+                else
+                {
+                    if (attemptCounts == 3)
+                    {
+                        suggestionHyperLink.Visible = true;
+                        suggestionHyperLink.Text = "Forgot your password?";
+                    }
+                    else
+                    {
+                        //timeout
+                        msgLabel.Text = "Reload the Web";
+                        
+                    }
+                }
+       
+            }
+            else
+            {
                 msgLabel.Text = "Email or password incorrect";
             }
             dR.Close();
+        }
+
+        protected void resetButton_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("ResetEmailorPassword.aspx");
         }
     }
 }

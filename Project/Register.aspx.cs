@@ -19,7 +19,8 @@ namespace Project
         {
             if (Page.IsValid) {
                 object returnVal;
-                string strName, strAddress, strPhone, strPassword, strEmail;
+                string strName, strAddress, strPhone, strPassword, strEmail, strQuestion, strAnswer;
+
                 int intShopperID = 0;
 
                 strName = nameTextBox.Text;
@@ -27,9 +28,11 @@ namespace Project
                 strPhone = phoneTextbox.Text;
                 strEmail = emailTextbox.Text;
                 strPassword = pswTextBox.Text.Trim();
+               strQuestion = DropDownList1.SelectedValue;
+                strAnswer = SecurityTextBox.Text;
 
                 DatabaseMgmt dbObj = new DatabaseMgmt();
-
+                
                 string strSqlCmd;
                 strSqlCmd = $"select ShopperID from Shopper where Email='{strEmail}'";
 
@@ -39,11 +42,9 @@ namespace Project
                     intShopperID = 0;
                 }
 
-
-
                 if(intShopperID == 0) {
-                    strSqlCmd = $"Insert into Shopper(Name, Address,Phone, Email, Passwd) VALUES ('{strName}','{strAddress}'," +
-                        $"'{strPhone}','{strEmail}','{strPassword}')";
+                    strSqlCmd = $"Insert into Shopper(Name, Address,Phone, Email, Passwd, SecurityQn, QnAnswer) VALUES ('{strName}','{strAddress}'," +
+                        $"'{strPhone}','{strEmail}','{strPassword}','{strQuestion}','{strAnswer}')";
                     dbObj.ExecuteNonQuery(strSqlCmd);
 
                     strSqlCmd = $"select MAX(ShopperID) From Shopper";
