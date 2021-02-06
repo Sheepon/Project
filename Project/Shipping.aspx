@@ -90,7 +90,7 @@
             <tr>
                 <td class="leftcolumn">Name</td>
                 <td class="rightcolumn">
-                    <asp:TextBox ID="nameTextBox" runat="server" BorderColor="#CCCCCC" BorderStyle="Solid" BorderWidth="1px"></asp:TextBox>
+                    <asp:TextBox ID="nameTextBox" runat="server" BorderColor="#CCCCCC" BorderStyle="Solid" BorderWidth="1px" ReadOnly="True"></asp:TextBox>
                     <br />
                 </td>
             </tr>
@@ -106,7 +106,7 @@
                 <td class="auto-style8">
                     Email</td>
                 <td class="auto-style9">
-                    <asp:TextBox ID="emailTextbox" runat="server" BorderColor="#CCCCCC" BorderStyle="Solid" BorderWidth="1px"></asp:TextBox>
+                    <asp:TextBox ID="emailTextbox" runat="server" BorderColor="#CCCCCC" BorderStyle="Solid" BorderWidth="1px" ReadOnly="True"></asp:TextBox>
                     <br />
                     </td>
             </tr>
