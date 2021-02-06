@@ -73,7 +73,6 @@
         </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-
     <br />
     <br />
     <br />
@@ -124,7 +123,6 @@
             </tr>
             <tr>
                 <td class="auto-style2" colspan="2">
-                        <asp:LinkButton CSSClass="button" ID="UpdateButton" runat="server" OnClick="UpdateButton_Click">Update</asp:LinkButton>
                         <asp:LinkButton CSSClass="button" ID="SubmitButton" runat="server" OnClick="RegisterButton_Click">Buy</asp:LinkButton>
                 </td>
             </tr>
