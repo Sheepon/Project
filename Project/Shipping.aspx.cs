@@ -13,60 +13,78 @@ namespace Project
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if(Page.IsPostBack == false) {
-                DatabaseMgmt objdbMgmt = new DatabaseMgmt();
-                SqlDataReader dR;
-                objdbMgmt.Connect();
 
-                string strSqlCmd;
-                strSqlCmd = $"select address,email,phone from Shopper where ShopperID='{Session["ShopperId"]}'";
-                dR = objdbMgmt.ExecuteSelect(strSqlCmd);
+            DatabaseMgmt objdbMgmt = new DatabaseMgmt();
+            SqlDataReader dR;
+            objdbMgmt.Connect();
 
-                nameTextBox.Text = (string)Session["Name"];
-                if (dR.Read()) {
-                    addressTextbox.Text = dR["address"].ToString();
-                    emailTextbox.Text = dR["email"].ToString();
-                    phoneTextbox.Text = dR["phone"].ToString();
-                }
+            string strSqlCmd;
+            strSqlCmd = $"select address,email,phone from Shopper where ShopperID='{Session["ShopperId"]}'";
+            dR = objdbMgmt.ExecuteSelect(strSqlCmd);
+
+            nameTextBox.Text = (string)Session["Name"];
+            if (dR.Read()) {
+                addressTextbox.Text = dR["address"].ToString();
+                emailTextbox.Text = dR["email"].ToString();
+                phoneTextbox.Text = dR["phone"].ToString();
             }
+
         }
 
         protected void RegisterButton_Click(object sender, EventArgs e)
         {
+            int intQty=0;
+            double dblBalance=0, dblTotalValue = 0, dblPrice = 0;
+
             DatabaseMgmt objdbMgmt = new DatabaseMgmt();
             DatabaseMgmt objdbMgmtProduct = new DatabaseMgmt();
             DatabaseMgmt objdbMgmtUpdate = new DatabaseMgmt();
+            DatabaseMgmt objdbAccCredit = new DatabaseMgmt();
 
+            SqlDataReader dR,dRProduct, dRBalance;
 
-            SqlDataReader dR,dRProduct;
-            string strSqlCmd = $"Select productId,quantity from shopcartitem where shopcartid = '{Session["ShopCartId"]}'";
+            string strSqlCmd = $"Select productId,price,quantity from shopcartitem where shopcartid = '{Session["ShopCartId"]}'";
             dR = objdbMgmt.ExecuteSelect(strSqlCmd);
             while (dR.Read()) {
+                intQty = int.Parse(dR["quantity"].ToString());
+                dblPrice = double.Parse(dR["price"].ToString());
                 strSqlCmd = $"Select productid,quantity from product where productid = '{dR["productId"]}'";
                 dRProduct = objdbMgmtProduct.ExecuteSelect(strSqlCmd);
                 while(dRProduct.Read()) {
-                    int intTmp = int.Parse(dRProduct["quantity"].ToString()) - int.Parse(dR["quantity"].ToString());
-                    strSqlCmd = $"update Product set quantity = {intTmp} where productId = '{dRProduct["productid"]}'";
-                    objdbMgmtUpdate.ExecuteNonQuery(strSqlCmd);
+
+                    dblTotalValue = dblPrice * intQty;
+
+
+                    strSqlCmd = $"Select Balance FROM AccountCredit Where AccBalanceID = " + Session["ShopperID"];
+                    dRBalance = objdbAccCredit.ExecuteSelect(strSqlCmd);
+
+                    if (dRBalance.Read())
+                    {
+                        dblBalance = double.Parse(dRBalance["Balance"].ToString());
+                    }
+                    dRBalance.Close();
+
+                    dblBalance = dblBalance - dblTotalValue;
+
+                    if (dblBalance >= 0)
+                    {
+                        strSqlCmd = $"Update AccountCredit Set Balance = {dblBalance} Where AccBalanceID = " + Session["ShopperID"];
+                        objdbAccCredit.ExecuteNonQuery(strSqlCmd);
+
+                        int intTmp = int.Parse(dRProduct["quantity"].ToString()) - int.Parse(dR["quantity"].ToString());
+                        strSqlCmd = $"update Product set quantity = {intTmp} where productId = '{dRProduct["productid"]}'";
+                        objdbMgmtUpdate.ExecuteNonQuery(strSqlCmd);
+
+                        msgLabel.Text = "Your order will be delivered soon";
+                    }
+                    else
+                        msgLabel.Text = "Insufficient Funds, please top up your account";
                 }
                 dRProduct.Close();
-                //strSqlCmd = $"update product set quantity ={dR[]};
-                //strSqlCmd = "UPDATE ShopCartItem SET Quantity=" + intQuantity + " WHERE ShopCartID=" + Session["ShopCartID"] + " AND ProductId=" + intProductID;
-            }
-            Session["ShopCartId"] = null;
-            msgLabel.Text = "Your order will be delivered soon";
-            Response.AddHeader("REFRESH", "3;URL=Home.aspx");
-        }
 
-        protected void UpdateButton_Click(object sender, EventArgs e)
-        {
-            int tmpDebug;
-            string sqlcmd = $"update shopper set name = '{nameTextBox.Text}', address = '{addressTextbox.Text}', email = '{emailTextbox.Text}', phone = '{phoneTextbox.Text}' where shopperid = '{Session["ShopperId"]}'";
-            //string strSqlCmd = $"update shopper set name = '{nameTextBox.Text}' where ShopperID='{Session["ShopperId"]}'";
-            DatabaseMgmt objdbMgmt = new DatabaseMgmt();
-            tmpDebug = objdbMgmt.ExecuteNonQuery(sqlcmd);
-            msgLabel.Text = "Updated. Settings Take effect after logout";
-            
+                Session["ShopCartId"] = null;
+                Response.AddHeader("REFRESH", "3;URL=Home.aspx");
+            }
         }
     }
 }
