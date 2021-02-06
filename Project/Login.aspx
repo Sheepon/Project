@@ -35,11 +35,15 @@
             <tr>
                 <td class="auto-style2" colspan="2">
                         <asp:LinkButton CSSClass="button" ID="loginButton" runat="server" OnClick="loginButton_Click">Login</asp:LinkButton>
+                    <br />
+                        <asp:LinkButton CSSClass="button" ID="ResetButton" runat="server" OnClick="resetButton_Click" CausesValidation="False">Forgot your username/password?</asp:LinkButton>
                 </td>
             </tr>
             <tr>
-                <td class="auto-style2" colspan="2">
+                <td class="auto-style5" colspan="2">
                     <asp:Label ID="msgLabel" runat="server"></asp:Label>
+                    <br />
+                    <asp:HyperLink ID="suggestionHyperLink" runat="server" NavigateUrl="~/ResetEmailorPassword.aspx" Visible="False">[suggestionHyperLink]</asp:HyperLink>
                 </td>
             </tr>
         </table>
@@ -93,6 +97,14 @@
             text-align: right;
             vertical-align:top;
     }
+
+
+
+
+        .auto-style5 {
+            text-align: center;
+            height: 26px;
+        }
 
 
 

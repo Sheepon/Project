@@ -69,6 +69,15 @@ namespace Project
         protected global::System.Web.UI.WebControls.LinkButton loginButton;
 
         /// <summary>
+        /// ResetButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton ResetButton;
+
+        /// <summary>
         /// msgLabel control.
         /// </summary>
         /// <remarks>
@@ -76,5 +85,14 @@ namespace Project
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label msgLabel;
+
+        /// <summary>
+        /// suggestionHyperLink control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink suggestionHyperLink;
     }
 }
